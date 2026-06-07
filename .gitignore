@@ -1,0 +1,6 @@
+# Ignore Office temp files
+~$*.docx
+
+# Ignore Packet Tracer temp files
+*.tmp
+~WRL*.tmp

@@ -88,15 +88,15 @@ class PortfolioGenerator:
 
     def _get_day_folders(self):
         """
-        Get all Day X folders in numerical order.
+        Get all day X folders in numerical order (case-insensitive).
         
         Returns:
-            List of Day folder paths sorted numerically
+            List of day folder paths sorted numerically
         """
         day_folders = []
         for item in self.repo_root.iterdir():
             if item.is_dir():
-                match = re.match(r'Day\s+(\d+)', item.name)
+                match = re.match(r'day\s+(\d+)', item.name, re.IGNORECASE)
                 if match:
                     day_number = int(match.group(1))
                     day_folders.append((day_number, item))
@@ -179,7 +179,7 @@ class PortfolioGenerator:
         day_folders = self._get_day_folders()
         
         if not day_folders:
-            print("No 'Day X' folders found in the repository.")
+            print("No 'day X' folders found in the repository.")
             return
 
         total_days = len(day_folders)
@@ -204,7 +204,7 @@ class PortfolioGenerator:
             if day_number != day_folders[-1][0]:
                 story.append(PageBreak())
 
-            print(f"  Processing Day {day_number}... ✓")
+            print(f"  Processing day {day_number}... ✓")
 
         # Build PDF
         try:

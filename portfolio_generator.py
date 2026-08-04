@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Portfolio PDF Generator
-Generates a professional PDF portfolio from daily project folders containing .docx notes and .pck files.
+Generates a professional PDF portfolio from daily project folders containing .docx notes and .pkt files.
 """
 
 import os
@@ -18,7 +18,7 @@ from reportlab.lib import colors
 
 
 class PortfolioGenerator:
-    """Generate a professional PDF portfolio from daily project folders."""
+    """Generate a professional PDF portfolio from daily project folders containing .docx notes and .pkt files."""
 
     def __init__(self, repo_root="."):
         """
@@ -125,18 +125,18 @@ class PortfolioGenerator:
         except Exception as e:
             return f"Error reading document: {str(e)}"
 
-    def _find_pck_file(self, day_folder):
+    def _find_pkt_file(self, day_folder):
         """
-        Find the .pck (Packet Tracer) file in a day folder.
+        Find the .pkt (Packet Tracer) file in a day folder.
         
         Args:
             day_folder: Path to the day folder
             
         Returns:
-            Filename of the .pck file or "Not found"
+            Filename of the .pkt file or "Not found"
         """
         for file in day_folder.iterdir():
-            if file.suffix.lower() == '.pck':
+            if file.suffix.lower() == '.pkt':
                 return file.name
         return "Not found"
 
@@ -188,7 +188,7 @@ class PortfolioGenerator:
         # Process each day
         for day_number, day_folder in day_folders:
             # Find files
-            pck_filename = self._find_pck_file(day_folder)
+            pkt_filename = self._find_pkt_file(day_folder)
             docx_file = self._find_docx_file(day_folder)
 
             # Extract content
@@ -198,7 +198,7 @@ class PortfolioGenerator:
                 content = "No Word document found in this folder."
 
             # Add day section to PDF
-            story.extend(self._create_day_section(day_number, content, pck_filename))
+            story.extend(self._create_day_section(day_number, content, pkt_filename))
             
             # Add page break between days (except for the last day)
             if day_number != day_folders[-1][0]:
@@ -251,14 +251,14 @@ class PortfolioGenerator:
         
         return elements
 
-    def _create_day_section(self, day_number, content, pck_filename):
+    def _create_day_section(self, day_number, content, pkt_filename):
         """
         Create a day section for the PDF.
         
         Args:
             day_number: Day number
             content: Extracted text content from the Word document
-            pck_filename: Name of the .pck file
+            pkt_filename: Name of the .pkt file
             
         Returns:
             List of Platypus elements
@@ -270,9 +270,9 @@ class PortfolioGenerator:
         elements.append(day_heading)
         
         # Packet Tracer file info
-        pck_info = f"<b>Packet Tracer File:</b> {pck_filename}"
-        pck_para = Paragraph(pck_info, self.styles['FileInfo'])
-        elements.append(pck_para)
+        pkt_info = f"<b>Packet Tracer File:</b> {pkt_filename}"
+        pkt_para = Paragraph(pkt_info, self.styles['FileInfo'])
+        elements.append(pkt_para)
         
         # Spacer
         elements.append(Spacer(1, 0.15*inch))

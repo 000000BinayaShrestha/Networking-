@@ -1,6 +1,6 @@
-# CCNA Networking Lab Journey (60 Days)
+# CCNA Networking Lab Journey (59 Days)
 
-This repository documents my structured 60-day hands-on networking journey focused on building strong fundamentals aligned with CCNA-level concepts.
+This repository documents my structured 59-day hands-on networking journey focused on building strong fundamentals aligned with CCNA-level concepts.
 
 The goal of this project is to move beyond theory and develop practical networking skills using Cisco Packet Tracer, supported by structured documentation and progressive learning.
 
